@@ -1,3 +1,4 @@
+<?php ini_set('display_errors', 1); error_reporting(E_ALL); ?>
 <?php include('logged.php');?>
 <?php include 'layout/header2.php' ?>
 <?php 
@@ -7,7 +8,7 @@
  
  $prospecto=$control->datosProducto($id_grupo);
 
-$id_post = "p"+$id_grupo;
+$id_post = "p".$id_grupo;
 $carta_aceptacion=0;
 
 if($id_grupo == 141){

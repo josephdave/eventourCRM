@@ -1,5 +1,5 @@
 <?php
- error_reporting(0);
+ //error_reporting(0);
 
 require_once __DIR__ . '/mysql_shim.php';
 
@@ -18,19 +18,18 @@ class control
 	/*Base de Datos*/
 	
 	 function baseDeDatos(){
-		
-      /* Make connection to database */
+
+      if ($this->connection) return;
       $this->connection = mysql_connect("localhost", "root", "") or die(mysql_error());
       mysql_select_db("eventour_crm", $this->connection) or die(mysql_error());
-	  mysql_query ('SET NAMES utf8');
-	  
+	  mysql_query('SET NAMES utf8', $this->connection);
+
    }
-   
+
    function consulta($q){
-	   
+
 	   	$this->baseDeDatos();
     	$result = mysql_query($q, $this->connection);
-		mysql_close($this->connection);
 		return $result;
    }
    
