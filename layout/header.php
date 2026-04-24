@@ -2,6 +2,11 @@
 require_once("config.php");
 require_once("control/control.php");
 
+if (!defined('COLOR1'))   define('COLOR1',   '#00538C');
+if (!defined('COLOR2'))   define('COLOR2',   '#ffffff');
+if (!defined('COLOR3'))   define('COLOR3',   '#004070');
+if (!defined('APP_NAME')) define('APP_NAME', 'EventourS CRM');
+
 $control = new Control();
 ?>
 

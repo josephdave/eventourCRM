@@ -6,12 +6,12 @@ require_once __DIR__ . '/mysql_shim.php';
 class control
 {
 
-	
+	public $connection = null;
 
    /* Class constructor */
    function Control(){
-	   
-	  
+
+
    }
 
 
