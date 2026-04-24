@@ -1,0 +1,490 @@
+<?php 
+
+$plan=$_REQUEST['plan'];
+
+require_once("../control/control.php");
+
+$control = new Control();
+
+$producto=$control->datosProducto($plan);
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Programa completo - EVENTOURSPORT</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="media-queries.css" />
+    <link href="tablecloth/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="tablecloth/tablecloth.js"></script>
+    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="accordion.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif:700,400,400italic,700italic' rel='stylesheet' type='text/css'>
+	
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body id="home">
+	<div id="wrapper">
+		
+		<header>
+			<h1><a href="index.html"><img src="eventour.png"  alt="" style="float:right"/></a><img src="<?php echo $plan."/colegio.jpg" ?>"  alt="" style="float:left;width:120px;margin:10px"/></h1><div style="display: table-cell;
+    vertical-align: middle;    height: 126px;">
+			<h1 style="font-size:150%"><?php echo $producto['grupo']?></h1>
+			<h2>Programa  de viaje </h2>
+            </div>
+			<p>&nbsp;</p>
+			<nav>
+			<div style="width:50%;margin:0 auto;">
+				<a href="#grupo">Grupo</a>
+				<a href="#pagos">Pagos</a>
+				<a href="#documentacion">Documentación	Viajero</a>
+				<a href="#seguro">Seguro de asistencia</a>
+              </div>
+			  <div class="clearfix"></div>
+			</nav>	
+		</header>
+				
+		<section id="main-content">
+			<div id="featured">
+			  <table width="508" border="1" cellpadding="0">
+			    <tr>
+				    <th colspan="2"><p align="center"><strong>INFORMACIÓN DEL GRUPO</strong></p></th>
+			    </tr>
+				  <tr>
+				    <td width="204" valign="top"><p><strong>Fecha de Viaje</strong></p></td>
+				    <td width="463" valign="top"><p align="center"><?php 
+					$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+$meses = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+ 
+					$salida = new DateTime($producto['f_salida']);
+					$llegada = new DateTime($producto['f_llegada']);
+					
+     $datediff = strtotime($producto['f_llegada'])- strtotime($producto['f_salida']);
+     $dias= floor($datediff/(60*60*24))+1;
+					
+					
+					echo "del ".$salida->format("j")." de ".$meses[$salida->format("n")]." al ".$llegada->format("j")." de ".$meses[$llegada->format("n")]." de ".$llegada->format("Y")?></p></td>
+			      </tr>
+				  <tr>
+				    <td width="204" valign="top"><p><strong>Destino</strong></p></td>
+				    <td width="463" valign="top"><p align="center"><?php echo $producto['destino']?></p></td>
+			      </tr>
+				  <tr>
+				    <td width="204" valign="top"><p><strong>Tiempo de Estancia</strong></p></td>
+				    <td width="463" valign="top"><p align="center"><?php echo $dias; ?> dias - <?php echo $dias-1; ?> noches</p></td>
+			      </tr>
+				  <tr>
+				    <td width="204" valign="top"><p><strong>Nombre del Hotel</strong></p></td>
+				    <td width="463" valign="top"><p align="center"><?php echo $producto['hotel']; ?><br>
+				    </p></td>
+			      </tr>
+				  <tr>
+				    <td width="204" valign="top"><p><strong>Valor del Programa</strong></p></td>
+				    <td width="463" valign="top"><p align="center"><?php echo $producto['moneda']?> <?php echo ($producto['valor_aereo']+$producto['valor_terrestre'])?></p></td>
+			      </tr>
+			  </table>
+			  <p><a href="#"></a>Uno de los aspectos más  importantes en este proceso es contar con la&nbsp;información&nbsp;personal  necesaria de los viajeros y sus padres o acudientes. Estos datos se utilizarán  para enviarles boletines periódicos con información sobre los avances de la  excursión, y además llevar un estricto control de la documentación de viaje,  pagos, saldos, etc. Por este motivo se requiere un registro claro y  completo, de la información de cada participante. Por favor para regístrala,  haga un clic en el siguiente boton:</p>
+              <p>&nbsp;</p>
+              <p align="center"><a href="https://eventoursport.travel/crm/registro.php?plan=<?php echo $plan?>" target="_blank" class="myButton">Inscripción al viaje de grado</a></p>
+	      </div> 
+			<!-- END Featured --><!-- END Latest -->
+		  <div class="clearfix"></div>
+			<hr/>
+			<div id="about">
+			  <h3 id="grupo">Información del Grupo</h3>
+			  <p>&nbsp;</p>
+			  <div class="accordion">
+			    <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-1">Servicios Incluidos</a>
+			      <div id="accordion-1" class="accordion-section-content">
+			        
+                    <?php include($plan."/incluidos.html"); ?>
+                    
+                    
+		          </div>
+			      <!--end .accordion-section-content-->
+		        </div>
+			    <!--end .accordion-section-->
+			    <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-2">Valor del Programa</a>
+			      <div id="accordion-2" class="accordion-section-content">
+			        
+                     <?php include($plan."/valor_programa.html"); ?>
+		          </div>
+			      <!--end .accordion-section-content-->
+		        </div>
+			    <!--end .accordion-section-->
+			    <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-3">Itinerario de Vuelos</a>
+			      <div id="accordion-3" class="accordion-section-content">
+			          <?php include($plan."/itinerarios.html"); ?>
+			      </div>
+			      <!--end .accordion-section-content-->
+		        </div>
+			    <!--end .accordion-section-->
+		      </div>
+			  <p>&nbsp;</p>
+			  <div class="accordion">
+			    <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-docu">Documentación de Viaje</a>
+			      <div id="accordion-docu" class="accordion-section-content">
+			        <p>En todos los casos, pasaporte al día, con vigencia mínima de 6 meses.<br>
+		            </p>
+			        <p>&nbsp;</p>
+			        <p><strong>Para mayores de 18 años.</strong></p>
+			        <ul>
+			          <li> Cédula de ciudadanía</li>
+		            </ul>
+			        <p>&nbsp; </p>
+			        <p><strong>Para menores de edad.</strong></p>
+			        <ul>
+			          <li>Tarjeta de identidad</li>
+			          <li>Permiso de salida del país debidamente autenticado en notaría, con vigencia no mayor a 60 días, firmado por sus dos padres. <a href="documentos/autorizacion_salida.pdf" target="_blank">Click aquí para descargar formato</a></li>
+			          <li> Fotocopia de la cédula de ambos padres</li>
+			          <li> Fotocopia del registro civil de nacimiento del menor</li>
+		            </ul>
+			        <p><br>
+			          <strong>Información importante sobre el PASAPORTE COLOMBIANO:</strong><br>
+			          A partir del 24 de noviembre de 2015, si su libreta es Convencional debe renovarla.<br>
+			          Tenga en cuenta que actualmente será aceptado el pasaporte de lectura mecánica durante su vigencia de 10 años y el pasaporte electrónico que se emite en Colombia desde el 1 de Septiembre del 2015, implementado por exigencia de la Unión Europea                 para eliminar la Visa Schengen. Los dos pasaportes serán aceptados para su viaje internacional.<br>
+			          <strong><br>
+			            ¿Cómo sé si tengo que cambiar mi pasaporte?</strong><br>
+			          Según el Decreto 1067, el cambio de pasaporte se adelanta por las siguientes razones:<br>
+			          1. Por rectificación de datos en el documento de identidad.<br>
+			          2. Por vencimiento.<br>
+			          3. Por daño que impida su uso.<br>
+			          4. Por robo o pérdida.<br>
+			          5. Cuando el pasaporte vigente no cuente con las páginas suficientes.<br>
+			          6. Por alcanzar la mayoría de edad.<br>
+			          7. En Colombia, por cumplir siete (7) años y obtener la Tarjeta de Identidad.<br>
+			          8. A partir del 24 de noviembre de 2015, si su libreta es Convencional debe renovarla.</p>
+			        <p align="center"> </strong></p>
+		          </div>
+			      <!--end .accordion-section-content-->
+		        </div>
+			    <!--end .accordion-section-->
+			    <!--end .accordion-section-->
+		      </div>
+			  <p>&nbsp;</p>
+			  <p align="center"> </strong></p>
+		  </div>
+		</section>
+	  <div class="clearfix"></div>
+        <div id="about">
+		  <h3 id="pagos">Información de Pagos</h3>
+		  <p>&nbsp; </p>
+		  <div class="accordion">
+        
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-pago">Calendario de Pagos</a>
+              <div id="accordion-pago" class="accordion-section-content">
+               
+ <?php include($plan."/calendario_pagos.html"); ?>
+                <p align="center"> </strong></p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+        
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-pago">Del tiquete aéreo</a>
+              <div id="accordion-pago" class="accordion-section-content">
+                <ul>
+                  <li>Por reglamentación IATA los tiquetes internacionales  están tarifados en Dólares Americanos y deben ser pagados en pesos en Colombia.  El valor del tiquete aéreo en pesos se calcula al cambio de la TRM (Tasa  Representativa del Mercado) de la fecha de expedición. </li>
+                  <li>El valor del tiquete está compuesto por la tarifa  aérea y los impuestos aéreos detallados. Los impuestos como el IVA, o salida de  cada país y las tasas de aeropuertos o administrativas, y pueden variar de  acuerdo a las legislaciones de cada país, por lo tanto el valor de estos, solo  se garantiza con la expedición de los tiquetes electrónicos. </li></ul>
+                <p align="center"> </strong></p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <div class="accordion-section"><a class="accordion-section-title" href="#accordion-terrestre">De la porción terrestre</a>
+              <div id="accordion-terrestre" class="accordion-section-content">
+                <ul>
+                  <li>Todos los servicios incluidos en la Porción  Terrestre están tarifados en dólares porque son proveídos por empresas  establecidas en el exterior, pero  como  debemos recaudarlos en pesos Colombianos, deben liquidarse a la TRM (tasa  representativa del mercado) del día de su pago. </li>
+                  <li>Para efectos legales, las Agencias de viajes y  turismo, estamos obligados a comprar divisas y a pagar impuestos sobre las  mismas, porque debemos pagar servicios a empresas internacionales, que tienen  cuentas de bancos en el exterior. Por esta razón estamos autorizadas por el  gobierno para cobrar un fee bancario el 2%, sobre el total de los servicios  terrestres en dólares. </li>
+                </ul>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            
+            <!--end .accordion-section-->
+         
+          </div>
+          <p>&nbsp;</p>
+<p>&nbsp;</p>
+		  <h3>Formas de Pago</h3>
+          <p>Para cumplir con el calendario de pagos, estamos  ofreciendo un servicio de recaudo ágil y seguro, a través de  los siguientes medios de pago:</p>
+          <p>&nbsp;</p>
+          <div class="accordion">
+          <?php if(strpos($producto['parametros'],'bancolombia') !== false){?>
+      <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-pse">Pago Botón PSE BANCOLOMBIA</a>
+
+  <div id="accordion-pse" class="accordion-section-content">
+               <p>Pago por el Portal  Electrónico de Bancolombia. En la web de Bancolombia encontrarán la opción &ldquo;<strong>Multipagos PSE</strong>&rdquo; (En el menú  Transacciones). Allí eligen la opción &ldquo;Hoteles y Turismo&rdquo;. Posteriormente se  despliega un directorio y por la letra <strong>E</strong>,  eligen a <strong>EVENTOUR SPORT</strong>, para pagar  por PSE.  Con esta opción ustedes pueden  pagar, con cargo a su cuenta de ahorros o corriente de cualquier banco, sin  costo adicional. También puede ingresar directamente a través del siguiente  botón:  </p>
+               <p>&nbsp;</p>
+               <p align="center"><a href="http://www.grupobancolombia.com/multipagospse/" class="myButton" target="_blank">Pago PSE BANCOLOMBIA</a></p>
+               <p align="center"></p>
+               <p>&nbsp;</p>
+               <p align="center">&nbsp;</p>
+          <p>&nbsp;</p>
+          <p align="center"> </strong></p>
+        </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <?php } ?>
+             <?php if(strpos($producto['parametros'],'bancobogota') !== false){?>
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-pse">Pago Botón PSE </a>
+
+  <div id="accordion-pse" class="accordion-section-content">
+               <p>En la web del Banco de Bogotá por la ruta: https://www.bancodebogota.com/wps/portal/banco-bogota/home# encontrarán  la opción &ldquo;Portal de pagos Electrónicos&rdquo; (En el menú Transacciones). Allí  escogen la opción &ldquo;Establecimientos Comerciales&rdquo;. Posteriormente se despliega  un directorio y por la letra <strong>E</strong>,  eligen a <strong>EVENTOUR SPORT</strong>, para pagar  por PSE.  Con esta opción ustedes pueden  pagar, con cargo a su cuenta de ahorros o corriente desde cualquier banco, sin  costo adicional. También puede ingresar directamente a través del siguiente  botón:  </p>
+               <p align="center">&nbsp;</p>
+          <p align="center"><a href="https://www.psepagos.co/PSEHostingUI/ShowTicketOffice.aspx?ID=2898
+
+" class="myButton" target="_blank">Pago PSE</a></p>
+               <p align="center"></p>
+               <p>&nbsp;</p>
+               <p align="center">&nbsp;</p>
+          <p>&nbsp;</p>
+          <p align="center"> </strong></p>
+        </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            
+            <!--end .accordion-section-->
+            
+            <?php } ?>
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-credito">Tarjetas de Crédito</a>
+              <div id="accordion-credito" class="accordion-section-content">
+                <p>Puede pagar todos  los servicios con tarjeta de crédito, liquidada a la TRM vigente, incluido  el valor del fee bancario.  <strong>En caso de elegir esta opción tenga en cuenta que:</strong></p>
+                <p>&nbsp;</p>
+                <ul>
+                  <li>El  pago con tarjeta de Crédito del tiquete aereo debe efectuarse en pesos, por el valor total de la  tarifa aérea más impuestos, a la TRM vigente del día establecido por la  aerolínea como fecha límite para la expedición de los boletos aéreos de todo el  grupo. En todo caso no será más allá de un mes, antes de la salida indicada en  este Programa. </li>
+                </ul>
+              
+ <?php include($plan."/calendario_credito.html"); ?>
+                  </div>
+                </div>
+                <p>Descargue el <a href="documentos/autorizacion_tc.pdf" target="_blank">formato de autorización de cargo a su tarjeta</a>, el cual se debe  elaborar uno para porción terrestre y otro para el pago del tiquete aéreo y envielo  a nuestro correo <a href="mailto:contabilidad@eventoursport.com">info@eventoursport.com</a> para poder registrar el abono. </p>
+                <p>&nbsp;</p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-dolares">Dólares en Efectivo</a>
+              <div id="accordion-dolares" class="accordion-section-content">
+                <p>Para quienes elijan hacer el pago de la  porción terrestre en dólares en efectivo, hemos dispuesto de la cuenta  Corriente en dólares No. 072-06972-7, del Banco CORPBANCA. Es requisito del  banco llevar la relación de los dólares. Recuerde que debe sumar el 2% del fee  bancario.&nbsp; Si utiliza este medio de pago, debe <a href="documentos/dolares.pdf" target="_blank">utilizar el formato  adjunto (CLIC PARA DESCARGAR)</a>. Adicionalmente es indispensable que por favor nos remita la copia de  la consignación sellada que le entrega el banco, a nuestro correo <a href="mailto:contabilidad@eventoursport.com">info@eventoursport.com</a> para poder registrar el abono. 
+                </p>
+              </div>
+              <div class="accordion-section"><a class="accordion-section-title" href="#accordion-pdol">Transferencia en Dólares para la porción terrestre</a>
+                <div id="accordion-pdol" class="accordion-section-content">
+                <div>
+                  <p>Si usted tiene una cuenta en dólares en Bancos internacionales, también puede hacer transferencia en dólares, a nuestra en USA. A continuación todos los datos que necesitará para la efectuar la transacción:</p>
+                  <p>&nbsp;</p>
+                  <p>BENEFICIARY:                    	  <strong>EVENTOUR SPORT SAS</strong></p>
+                  <p>BENEFICIARY ADDRESS:    <strong> Avda 5C Nte 23DN-35 Cali, Colombia</strong></p>
+                  <p>BANK INFO:                        <strong> BANCO DE BOGOTA MIAMI AGENCY</strong></p>
+                  <p>BANK ADDRESS:                  <strong>701 Brickell Avenue, Suite 1450. Miami, Florida 33131 </strong></p>
+                  <p>ABA:                                      <strong>066010720 (router number)</strong></p>
+                  <p>SWIFT:                                  <strong>BBOGUS3M</strong></p>
+                  <p>ACCOUNT:                           <strong>58784</strong></p>
+                  <p>&nbsp;</p>
+                  <p>Recuerde que para registrar su pago es indispensable que nos envíe soporte de la consignación o transferencia. Si cuenta con chequera de su banco en USA, también podemos recibirle su cheque en nuestra oficina, ubicada en la Avenida 5C Norte 23DN-35.</p>
+                </div>
+                <p>&nbsp;</p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+                <?php if(strpos($producto['parametros'],'proexcursion') !== false){?>
+                        <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-bono">Pasaporte Proexcursión</a>
+                          <div id="accordion-bono" class="accordion-section-content">
+                <p align="center"><strong><img src="pasaporte.jpg"  alt=""/></strong></p>
+                <p><strong>Eventour Sport</strong> desarrolló esta propuesta considerando la frecuente solicitud de diferentes padres de familia,  que nos sugerían algún aliciente para familiares y amigos que a cambio de su donación, tuvieran la posibilidad de participar en un sorteo por un premio realmente atractivo, así que con la posibilidad de "ganarse la selección Colombia" ofrecemos a ustedes esta simpática opción de hacer de este, el mejor regalo de grado, para los viajeros.<u></u><u></u></p>
+                <p> </p>
+                <p>A partir del 14 de Noviembre, y en el horario de jornada laboral, pueden retirarlos, acogiéndose a los <strong>TÉRMINOS Y CONDICIONES </strong><u><a href="documentos/legales_bono.pdf" title="undefined" target="_blank">(clic para descargarlos)</a></u> del <strong>PASAPORTE PROEXCURSIÓN</strong> de Eventour Sport.</p>
+                <p>&nbsp;</p>
+              </div>
+              
+             
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <?php } ?>
+          </div>
+          </div>
+          <p>&nbsp;</p>
+           <div class="clearfix"></div>
+           <h3>Términos y condiciones del programa</h3>
+          <p>&nbsp;</p>
+        
+          <div class="accordion">
+            
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-t1">Compromisos de Eventour Sport con el grupo</a>
+              <div id="accordion-t1" class="accordion-section-content">
+                <ul>
+                  <li>La cantidad de planes  descrita en las <strong>CONCESION ESPECIAL PARA  EL COLEGIO</strong>, completamente gratis (sin  incluir impuestos), no reembolsable, y aplicable sólo para viajar con el grupo. </li>
+                  <li>Convocar con un mes de  anticipación a la fecha de viaje, para la reunión que se efectuará para la entrega y firma de los padres e hijos, del <strong><em>MANUAL DE COMPORTAMIENTO Y CONVIVENCIA</em></strong>. </li>
+                  <li>Envíos de BOLETINES INFORMATIVOS,  antes y durante el viaje. </li>
+                  <li>Acompañamiento de un guía adulto EVENTOUR SPORT por  cada 20 viajeros, durante todo el viaje, mínimo uno.</li>
+                  <li>Asignación de un coordinador del departamento de  grupos del hotel, para su asistencia, durante la permanencia en este. </li>
+                  <li>Asistencia médica permanente durante todo el viaje, y  cuando así lo requiera la salud y el bienestar de alguno de los integrantes del  grupo, asignado por la compañía de asistencia. </li>
+                </ul>
+                <p>&nbsp;</p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-docu">Compromisos del grupo con Eventour Sport</a>
+              <div id="accordion-docu" class="accordion-section-content">
+                <ul>
+                  <li>Sera  considerado como grupo una cantidad de pasajeros integrados por 15 o más  personas adultas viajando juntas, en la misma ruta, fechas y vuelos. No se considerará  en grupo y no gozará de los beneficios de grupo, el viajero que no cumpla con  estos  requisitos.</li>
+                  <li>El  Comité de Padres a cargo entregará por escrito, una vez aprobada nuestra  propuesta de viaje, una lista informando la cantidad y nombres de los viajeros,  que deben ser, exactamente como figuran en el pasaporte.</li>
+                  <li><strong>EVENTOUR SPORT</strong> y/o la  Aerolínea no podrán ser demandados por retrasos o cancelaciones de vuelos  debido a fenómenos de la naturaleza, o a cualquier otra causa fuera del control  nuestro.</li>
+                  <li>El requerimiento  de utilización de las sillas del grupo es mínimo del 90% de las sillas  reservadas, según la lista y cantidad de viajeros entregada.</li>
+                  <li>Favor  tener en cuenta que tanto las tasas de combustible, aeropuertos e impuestos gubernamentales  pueden sufrir ajustes, antes de la emisión de los tiquetes electrónicos o de la  utilización del alojamiento en los hoteles.</li>
+                  <li>Un cargo  de USD 150 será aplicado por cualquier cambio de nombre que se haga después de  la fecha límite de reserva, más el costo de USD 25 de la  tasa administrativa. </li>
+                  <li>Un cargo  de USD 150 será aplicado por cualquier cambio realizado por el pasajero después  de emitirse los tiquetes, más el costo de USD 25 de la tasa administrativa. </li>
+                  <li>Los  tiquetes con tarifas de Grupo <u>no son reembolsables</u>. En caso de no  viajar, pueden ser utilizados a nombre del titular, para futuros viajes en  rutas internacionales, de la misma aerolínea, con una vigencia máxima de 1 año,  previo pago de la penalidad por cambio fecha de viaje, por valor de USD 150, más el costo de USD 25 de la tasa administrativa y de la diferencia de  tarifa, a que hubiere lugar. </li>
+                  <li>Los  nombres de los pasajeros deben ser suministrados tal como figuren en el  pasaporte. En caso de que el nombre suministrado sea diferente al que figura en  el pasaporte, este cambio implicará pagar penalidad por cambio de nombre,  indicada anteriormente. </li>
+                  <li>Para garantizar las  reservas del grupo, debe efectuarse el depósito correspondiente a la TRM del  día, por cada viajero, en la fecha indicada en el calendario de pagos de este  programa,.</li>
+                  <li>Los  tiquetes del grupo solo podrán ser expedidos por <strong>EVENTOUR SPORT</strong> de  acuerdo a las cláusulas del convenio firmado con la aerolínea en el momento de  cotizar y confirmar el grupo. </li>
+                  <li>Las tarifas  de este grupo tienen un precio y condiciones especiales, por lo tanto no pueden  combinarse con otras promociones o beneficios, tales  como tiquetes de millas, etc. y solo podrán  ser expedidos por <strong>EVENTOUR SPORT. </strong></li>
+                  <li>Para la  emisión de tiquetes otorgados como beneficios del grupo, la aerolínea  aplicará los cargos de impuestos y tasas, de acuerdo  a la misma ruta y tarifa del grupo.</li>
+                  <li>No se  aceptan cambios de nombre después de la emisión de los tiquetes, salvo con el  cargo de la penalidad <u>por el cambio total del nombre</u>.</li>
+                  <li>Las  sillas reservadas están sujetas a cancelación de no cumplirse con alguno  de  los requisitos mencionados  anteriormente<strong>.</strong></li>
+                  <li>Para conservar la tarifa aérea  de grupo, las tarifas de habitaciones y todas las actividades incluidas en este  programa, la aerolínea y el hotel, y tour operadores, exigen un deposito, cuyo  valor esta indicado en el calendario de pagos, incluido en este programa.  Despues de estas fechas, las tarifas sufriran ajustes.</li>
+                  <li>Todos los padres, tutores y  viajeros, deben asistir a la reunion que se convocara 30 dias antes de la  salida del grupo, para informarse, acatar y aceptar con su firma, el <strong><em><a href="documentos/manual.pdf" target="_blank" >MANUAL y GUIA DE COMPORTAMIENTO PARA VIAJES  EN GRUPO DE EVENTOUR SPORT (CLIC AQUI)</a></em></strong><em>, </em>al  que deben acogersetodos los viajeros.</li>
+                </ul>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p align="center"> </strong></p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-t2">Claúsulas de Responsabilidad</a>
+              <div id="accordion-t2" class="accordion-section-content">
+                <ol>
+                  <li><strong>Eventour Sport, </strong>con Registro Nacional de Turismo vigente No. 16310,<strong> </strong>en su calidad  de agente de viajes y turismo y sus operadores en el destino, organizadores de  este programa, declaramos explícitamente que actuamos como intermediarios entre  los pasajeros, por una parte y las entidades llamadas a proporcionar los  servicios descritos en los diferentes itinerarios, por la otra parte,  responsabilizándonos del cumplimiento de los servicios mencionados en este  programa.</li>
+                  <li><strong>Eventour Sport </strong>y sus operadores, declinan toda responsabilidad y gastos extras por  retrasos, huelgas, terremotos, huracanes, avalanchas o demás causas de fuerza  mayor, así como cualquier pérdida, daño, accidente o irregularidad que pudiera  ocurrir a los pasajeros y sus pertenencias, cuando estos sean motivados por  terceros, y por tanto ajenos al control del Operador y sus afiliados.  Igualmente quedamos exentos de cualquier perjuicio por modificación o retraso  en los itinerarios aéreos que se incluyan en los diferentes programas.</li>
+                  <li><strong>Eventour Sport</strong> se reserva el derecho de hacer cambios en el itinerario, fecha de viaje,  hoteles, transporte y los demás que sean necesarios para garantizar el éxito de  la excursión en casos particulares en los que, por causa del hotel y operadores  turísticos, se presenten fallas en la prestación del servicio. </li>
+                  <li><strong>Eventour Sport </strong>y sus operadores tiene la prerrogativa de modificar el itinerario o los  hoteles confirmados y demás servicios, por otros de igual o superior Categoría,  cuando dichos cambios redunden en beneficio de la calidad del viaje.</li>
+                  <li>Todos los servicios incluidos en los programas para grupos, reservados y pagados  de acuerdo con el calendario de pagos aquí establecido, no serán reembolsables,  porque bajo esos términos y condiciones, las aerolíneas, hoteles y  operadores,  garantizan las reservas  y  preservan las tarifas incluidas en  este programa. Sin embargo en casos extremos de fuerza mayor comprobada, los  servicios pueden ser cedidos a otro viajero nuevo, que no esté inscrito antes, descontando  el valor de las penalidades por cambio de nombres, si hubiere lugar, descritas  en los <strong>COMPROMISOS DEL  GRUPO CON EVENTOUR SPORT</strong>. Para estos casos, sugerimos tomar por un módico  costo opcional, el seguro de cancelación <strong><em>ANY REASON</em></strong><em> <strong>ASSIST CARD</strong></em><strong>, </strong>cuyo fin es recuperar<strong> </strong>los depósitos o gastos pagados por  anticipado para el viaje, de acuerdo a las condiciones y compromisos generales  del grupo por los servicios incluidos y descritos en este programa, suscrito entre  el Titular y la Agencia de Viajes. <strong><u>Este  seguro puede</u></strong><strong><u> ser adquirido, únicamente con el pago de la primera cuota.</u></strong></li>
+                  <li><strong>Eventour Sport</strong> está en la obligación de informar a los pasajeros de los requerimientos  de cada destino, como vacunas, documentación personal requerida para facilitar  el desplazamiento en destinos nacionales e internacionales, sin embargo  declinamos toda responsabilidad en caso de que las autoridades del país o  países visitados, nieguen al pasajero el ingreso al mismo, evento en el cual el  pasajero no tendrá derecho al reintegro del valor de los servicios no  utilizados.</li>
+                  <li><strong>Eventour Sport </strong>y/o los operadores turísticos tienen la prerrogativa de retirar del tour  a quien por causa grave de carácter moral o disciplinaria, atente contra el  éxito del programa o no acate todas las normas y  protocolos descritos en el <strong><em>MANUAL y  GUIA DE COMPORTAMIENTO PARA VIAJES EN GRUPO DE EVENTOUR SPORT</em></strong><em>, </em>caso en el cual el usuario no  tendrá derecho al reintegro del valor de los servicios turísticos no  disfrutados, en concordancia con las penalidades, incluidas en el numeral 5 de  estas <strong>CLÁUSULAS DE RESPONSABILIDAD</strong></li>
+                  <li><strong>Eventour Sport </strong>y/o los operadores turísticos, no se hacen responsables frente a la  contravención de normas, leyes y/o asuntos legales u otros inconvenientes, en  que pueda verse involucrado el viajero en otro país, casos en que el viajero  será obligado a retirarse de la excursión por tales motivos, y no le serán  reembolsados los servicios no tomados, en concordancia con las condiciones incluidas  en el numeral 5 de estas <strong>CLÁUSULAS DE RESPONSABILIDAD</strong></li>
+                  <li>El Pasajero es responsable del equipaje y demás pertenecías personales que  lleve consigo y  <strong>Eventour Sport,</strong> no se hará responsable en caso de pérdida de los mismos. <strong>Eventour Sport</strong>,  incluye en este programa un seguro de equipaje con una cobertura específica que  cubra tales imprevistos.</li>
+                  <li>Toda reserva debe ser confirmada y pagada, en las fechas establecidas en  el calendario de pagos. De no cumplirse con estos compromisos la reserva será  cancelada y podría presentarse cargo por concepto de cancelación de servicios.  Las reservaciones y venta de tiquetes y boletos aéreos para la participación de  viajes en grupos, para cruceros, eventos deportivos y culturales, congresos,  ferias, exposiciones y similares, se sujetaran a las condiciones  penalizaciones que impongan las aerolíneas,  hoteles y operadores.</li>
+                  <li><strong>Penalizaciones en caso  de cancelación:</strong></li>
+                </ol>
+                <p><strong><u>Tiquete aéreo</u></strong>:<br>
+                Estas son las penalidades establecidas  por la aerolínea en las tarifas aplicadas para grupos:</p>
+                <ol>
+                  <ol>
+                    <li>Los tiquetes con tarifa de grupo no son reembolsables</li>
+                    <li>Cambio de nombre antes de la expedición de los tiquetes y después de  suministrada oficialmente la lista de viajeros USD 150, más el cargo por tasa  administrativa.</li>
+                    <li>Cambios de nombre una vez esté expedido el tiquete USD 150, más la  diferencia en la clase de tarifa, si la hubiese, más el cargo por tasa administrativa.</li>
+                    <li>Toda solicitud de sustitución de los servicios a nombre de otro viajero,  debe realizarse mediante nota escrita del titular de la factura dirigida a <strong>Eventour  Sport</strong>. Conocido el nombre del viajero sustituto, y pagada la penalidad por  el cambio de nombre,  la efectuaremos de  inmediato. No habrá devoluciones por servicios voluntariamente no utilizados.
+                      <p><strong><u>Porción terrestre</u></strong> (Hoteles, traslados, tours etc.):<u></u><u></u>
+                      </p>
+                      <ol>
+                        <li>Con 90 días de anticipación a la fecha de viaje US 400 por pasajero.<u></u><u></u></li>
+                        <li>Con 60 días<span lang="ES">de anticipación a la fecha su viaje US 300 por persona.</span><u></u><u></u></li>
+                        <li><span lang="ES">Con 30 días de anticipación a la fecha de viaje, no hay lugar a devolución</span><span lang="ES">.</span></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </ol>
+                <p>&nbsp;</p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+          </div>
+          <p>&nbsp;</p>
+          <div class="clearfix"></div>
+          <h3 id="seguro">Seguro de Asistencia</h3>
+          <p>&nbsp;</p>
+          <div class="accordion">
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-asis">Seguro de Asistencia ASSIT CARD</a>
+              <div id="accordion-asis" class="accordion-section-content">
+                <p>&nbsp;</p>
+                <p align="center"><a href="documentos/asisstcard.pdf" target="_blank" class="myButton">Ver Cobertura</a></p>
+          <p align="center"></p>
+              <p>&nbsp;</p>  
+          <p>Si el alumno requiere asitencia medica especial por enfermedad o utiliza medicamentos por enfermedad preexistente, por favor complete el siguiente formato y envielo a correo info@eventoursport.com</p>
+          <p>&nbsp;</p>
+          <p align="center"><a href="documentos/asistencia_medica.pdf" target="_blank" class="myButton">Formato de autorización - Menores de Edad</a></p>
+          <p align="center"></p>
+          <p>&nbsp;</p>
+          
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+            <div class="accordion-section"> <a class="accordion-section-title" href="#accordion-any">Seguro de Cancelacion ANY REASON</a>
+              <div id="accordion-any" class="accordion-section-content">
+               <p>Seguro de  cancelación <strong>ANY REASON</strong> <strong>ASSIST CARD. </strong>Es para la pérdida  irrecuperable de depósitos o gastos pagados por anticipado por el viaje de  acuerdo a las condiciones generales del contrato o programa suscrito por el  Titular con la Agencia de Viajes. <strong>Debe ser adquirido en la primera cuota</strong> (<a href="documentos/any_reason.pdf" target="_blank">Clic para consultar términos y condiciones especiales</a>)<br>
+                 <strong>VALOR: USD 60</strong><br>
+  <strong>Tarifas sujetas a cambio  sin previo aviso por parte de los parques o proveedores</strong></p>
+           <div class="clearfix"></div>
+			<hr/>
+          <p>&nbsp;</p>
+                <p>&nbsp;</p>
+              </div>
+              <!--end .accordion-section-content-->
+            </div>
+            <!--end .accordion-section-->
+           
+              <!--end .accordion-section-content-->
+          </div>
+            <!--end .accordion-section-->
+      </div>
+        
+          <div class="clearfix"></div>
+			<hr/>
+         
+          <div id="featured">
+            <h4>CLÁUSULA DE RESPONSABILIDAD ESTABLECIDA 
+            POR EVENTOUR SPORT (Decreto 053 de 2002)</h4>
+          <p><strong>EVENTOUR SPORT</strong> con Registro  Nacional de Turismo N° 16310, está sujeta al régimen de responsabilidad que  establece la Ley 300 de 1.996 y los decretos 1057 de 1.997 y 53 de 2.002.  Tarifas sujetas a cambio, disponibilidad y vigencia sin previo aviso. Aplican  restricciones y condiciones para cada tarifa publicada según su vigencia.  No incluye gastos no especificados en los  programas.  Los impuestos, tasas y  combustibles que afectan las tarifas aéreas, hoteleras y demás servicios  ofrecidos por EVENTOUR SPORT pueden sufrir variaciones en cualquier momento sin  previo aviso. Aplican restricciones y multas por incumplimiento o cancelaciones  de los viajeros conforme a las normas legales. EVENTOUR SPORT cumple con las  disposiciones de Ley 679 de 2001 y para prevenir y contrarrestar, la  explotación, la pornografía y el turismo sexual a niños, niñas y adolescentes  en el país que son sancionados penalmente conforme a las leyes vigentes,  nos  acogemos a los códigos de conducta y  tenemos e implementamos procedimientos, con el fin de proteger los menores de  edad.</p>
+<p>&nbsp;</p>
+<p align="center"><img src="eventour.png"  alt=""/></p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#FFF">
+  <tr>
+    <td align="left"><p align="left"><strong>Maria Paula Luna Stapel</strong><br>
+      Gerente Comercial <br>
+    </p>
+      <p></p></td>
+    <td align="right"><p align="right"><strong>Ricardo Luna Rivera</strong></p>
+      <p align="right">Director General</p></td>
+  </tr>
+</table>
+<p align="center"><strong>EVENTOUR SPORT </strong><br>
+Avenida 5C Norte 23DN - 35<br>
+Cali - Colombia<br>
+Tel: (572) 6604000<br>
+www.eventoursport.travel </p>
+<p align="center"><br>
+</p>
+          <p></p>
+      </div>
+         
+</div>
+		</section>	
+		<hr/>
+		<footer>
+			<p>&copy; 2015 - EventourSport</p>
+		</footer>		
+		
+	</div> <!-- END Wrapper -->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</body>
+</html>

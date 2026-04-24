@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta lang="es">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EventourCRM - Listado de Colegios</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/bootstrap-table.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--Icons-->
+<script src="js/lumino.glyphs.js"></script>
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Eventour®</span>CRM</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> M. Paula <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+							<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
+							<li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Buscar">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Panel de Administración</a></li>
+			<li><a href="ventas.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Ventas</a></li>
+			<li class="parent ">
+				<a href="#">
+					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg> Colegios</a>
+				</a>
+				<ul class="children" id="sub-item-1">
+					<li class="active">
+						<a class="" href="colegios.html">
+							<svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Ver Colegios
+						</a>
+					</li>
+					<li>
+						<a class="" href="crear-colegio.html">
+							<svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg> Crear Colegio
+						</a>
+					</li>
+					<li>
+						<a class="" href="agregar-viajero.html" target="_self">
+							<svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Agregar Viajero
+						</a>
+					</li>
+				</ul>
+			</li>
+			                         <li class="parent ">
+				<a href="#">
+					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>Acompañantes</a>
+				</a>
+				<ul class="children" id="sub-item-2">
+					<li>
+						<a class="" href="acompanantes.html">
+							<svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Ver Acompañantes
+						</a>
+					</li>
+					<li>
+						<a class="" href="agregar-acompanante.html">
+							<svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg> Agregar Acompañante
+						</a>
+					</li>
+				</ul>
+			</li>
+            <li class="parent ">
+				<a href="#">
+					<span data-toggle="collapse" href="#sub-item-3"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>Liquidaciones</a>
+				</a>
+				<ul class="children" id="sub-item-3">
+					<li>
+						<a class="" href="liquidacion-login.html">
+							<svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg>Login</a>
+					</li>
+					<li>
+						<a class="" href="liquidacion.html">
+							<svg class="glyph stroked download"><use xlink:href="#stroked-download"/></svg> Liquidacion
+						</a>
+					</li>
+				</ul>
+				</li>
+                         <li role="presentation" class="divider"></li>
+			<li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Acceso Usuario</a></li>
+		</ul>
+
+
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+				<li class="active">Listado de Colegios</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Listado de Colegios</h1>
+			</div>
+		</div><!--/.row-->
+				
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Grupos</div>
+					<div class="panel-body">
+						<table data-toggle="table"   data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+						    <thead>
+						    <tr>
+						        <th data-field="state" data-checkbox="true" >Año</th>
+						        <th data-field="id" data-sortable="true">Grupo</th>
+						        <th data-field="name"  data-sortable="true">Origen</th>
+						        <th data-field="destino" data-sortable="true">Destino</th>
+                                <th data-field="inscritos" data-sortable="true">Inscritos</th>
+                                <th data-field="viajan" data-sortable="true">Viajan</th>
+                                <th data-field="pendientes" data-sortable="true">A definir</th>
+                                <th data-field="no-viajan" data-sortable="true">No Viajan</th>
+                                <th data-field="ver-inscritos" data-sortable="true">Detalles</th>
+                                <th data-field="add" data-sortable="true">Acciones</th>
+						    </tr>
+						    </thead>
+                            <tbody>
+                                        <tr>
+                                            <td>2016</td>
+                                            <td>Colegio Berchmans</td>
+                                            <td>Cali</td>
+                                            <td>Cancún</td>
+                                            <td>91</td>
+                                            <td>5</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td><button type="primary" class="btn-xs btn-primary">VER +</button></td>
+                                            <td><button type="submit" class="btn-xs btn-danger">+ Viajero</button></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>2016</td>
+                                            <td>Colegio Bennett</td>
+                                            <td>Cali</td>
+                                            <td>Cancún</td>
+                                            <td>49</td>
+                                            <td>38</td>
+                                            <td>2</td>
+                                            <td>9</td>
+                                            <td><a href="liceo-frances.html" target="_self"><button type="submit" class="btn-xs btn-primary">VER +</button></a></td>
+                                            <td><a href="agregar-viajero.html" target="_self"><button type="submit" class="btn-xs btn-danger">+ Viajero</button></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2016</td>
+                                            <td>Colegio Colombo</td>
+                                            <td>Cali</td>
+                                            <td>Punta Cana</td>
+                                            <td>49</td>
+                                            <td>38</td>
+                                            <td>2</td>
+                                            <td>9</td>
+                                            <td><button type="submit" class="btn-xs btn-primary">VER +</button></td>
+                                            <td><button type="submit" class="btn-xs btn-danger">+ Viajero</button></td>
+                                        </tr>
+                                    </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->	
+        
+        
+        <div class="row">
+			<div class="col-xs-12 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Colegio Berchmans</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Colegio Colombo</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Colegio Bennett</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Liceo Tacurí</h4>
+						<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--row-->
+			
+						<script>
+						    $(function () {
+						        $('#hover, #striped, #condensed').click(function () {
+						            var classes = 'table';
+						
+						            if ($('#hover').prop('checked')) {
+						                classes += ' table-hover';
+						            }
+						            if ($('#condensed').prop('checked')) {
+						                classes += ' table-condensed';
+						            }
+						            $('#table-style').bootstrapTable('destroy')
+						                .bootstrapTable({
+						                    classes: classes,
+						                    striped: $('#striped').prop('checked')
+						                });
+						        });
+						    });
+						
+						    function rowStyle(row, index) {
+						        var classes = ['active', 'success', 'info', 'warning', 'danger'];
+						
+						        if (index % 2 === 0 && index / 2 < classes.length) {
+						            return {
+						                classes: classes[index / 2]
+						            };
+						        }
+						        return {};
+						    }
+						</script>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->	
+		
+		
+	</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-table.js"></script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>
