@@ -1,9 +1,11 @@
 <?php
+require_once __DIR__ . '/control/mysql_shim.php';
+
 $mysql_host = "localhost";
-$mysql_database = "eventour_crm"; //create the database called "comment_sys"
-$mysql_user = "eventour_databas";
-$mysql_password = "h3tabew3";
+$mysql_database = "eventour_crm";
+$mysql_user = "root";
+$mysql_password = "";
 
 mysql_connect($mysql_host,$mysql_user,$mysql_password);
-mysql_select_db($mysql_database); 
+mysql_select_db($mysql_database);
 ?>

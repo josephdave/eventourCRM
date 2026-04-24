@@ -1,6 +1,7 @@
 <?php session_start();
-	//error_reporting(0);
-	
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+
 	require_once("control/control.php");
 
 $control = new Control();

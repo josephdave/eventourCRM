@@ -1,6 +1,7 @@
 <?php
  error_reporting(0);
 
+require_once __DIR__ . '/mysql_shim.php';
 
 class control
 {
@@ -19,7 +20,7 @@ class control
 	 function baseDeDatos(){
 		
       /* Make connection to database */
-      $this->connection = mysql_connect("localhost", "eventour_databas", "h3tabew3") or die(mysql_error());
+      $this->connection = mysql_connect("localhost", "root", "") or die(mysql_error());
       mysql_select_db("eventour_crm", $this->connection) or die(mysql_error());
 	  mysql_query ('SET NAMES utf8');
 	  
