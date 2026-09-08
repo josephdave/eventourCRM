@@ -10,6 +10,8 @@
 #   ./deploy.sh diff      Muestra que archivos cambiarian. No copia nada.
 #   ./deploy.sh deploy    Verifica, respalda y despliega (pide confirmacion).
 set -euo pipefail
+# Sin esto un fallo con `set -e` (p.ej. un `read` en EOF) aborta en silencio.
+trap 'c=$?; echo "ERROR: deploy.sh aborto con codigo $c (linea $LINENO)" >&2; exit $c' ERR
 
 SSH_USER=eventour
 SSH_HOST=104.255.192.171
@@ -34,6 +36,8 @@ SSH_OPTS="-i $SSH_KEY -p $SSH_PORT -o BatchMode=yes -o StrictHostKeyChecking=acc
 SSH="ssh $SSH_OPTS ${SSH_USER}@${SSH_HOST}"
 
 MODE="${1:-check}"
+ASSUME_YES=0
+case "${2:-}" in --yes|-y) ASSUME_YES=1 ;; esac
 
 # ---------------------------------------------------------------- 1. git
 step "1/6  Estado del repositorio"
@@ -111,9 +115,13 @@ step "5/6  Cambios que se aplicarian"
 RSYNC_BASE=(rsync -rltz --no-perms --no-owner --no-group --chmod=D755,F644
             --itemize-changes --exclude-from=.deployignore
             -e "ssh $SSH_OPTS")
-"${RSYNC_BASE[@]}" --dry-run ./ "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/" | grep -E '^[<>ch*]' || true
+# </dev/null es OBLIGATORIO: rsync sobre ssh consume el stdin del script y
+# dejaria el 'read' de confirmacion de mas abajo en EOF, lo que con `set -e`
+# aborta el despliegue en silencio. Ademas se corre una sola vez y se cachea.
+DRY=$("${RSYNC_BASE[@]}" --dry-run ./ "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/" </dev/null)
+echo "$DRY" | grep -E '^[<>ch*]' || true
 echo
-CHANGED=$("${RSYNC_BASE[@]}" --dry-run ./ "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/" | grep -cE '^[<>ch]' || true)
+CHANGED=$(echo "$DRY" | grep -cE '^[<>ch]' || true)
 ok "$CHANGED archivo(s) a transferir"
 
 if [ "$MODE" != "deploy" ]; then
@@ -123,8 +131,15 @@ fi
 [ "$CHANGED" -gt 0 ] || { step "Nada que desplegar."; exit 0; }
 
 echo
-read -r -p "${BLD}Desplegar a PRODUCCION? (escribe: si)${RST} " R
-[ "$R" = "si" ] || die "cancelado por el usuario"
+if [ "$ASSUME_YES" = "1" ]; then
+    ok "confirmacion omitida (--yes)"
+elif [ -r /dev/tty ]; then
+    # Se lee de /dev/tty, no de stdin: stdin puede venir de una tuberia.
+    read -r -p "${BLD}Desplegar a PRODUCCION? (escribe: si)${RST} " R </dev/tty || R=""
+    [ "$R" = "si" ] || die "cancelado por el usuario"
+else
+    die "sin terminal para confirmar. Usa: ./deploy.sh deploy --yes"
+fi
 
 # ---------------------------------------------------------------- 6. deploy
 step "6/6  Respaldo y despliegue"
@@ -139,7 +154,7 @@ $SSH "mkdir -p $BACKUP_DIR && cd $REMOTE_DIR && \
   ls -lh $BACKUP_DIR/crm-codigo-$STAMP.tar.gz"
 ok "respaldo: $BACKUP_DIR/crm-codigo-$STAMP.tar.gz"
 
-"${RSYNC_BASE[@]}" ./ "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/"
+"${RSYNC_BASE[@]}" ./ "${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}/" </dev/null
 ok "archivos sincronizados"
 
 # Verificacion post-despliegue
