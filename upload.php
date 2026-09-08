@@ -1,19 +1,43 @@
 <?php
-$grupo=$_REQUEST['grupo'];
-    if(isset($_POST['imagebase64'])){
-        $data = $_POST['imagebase64'];
+/* Corregido 2026-08-12 tras el incidente del 2026-08-10.
+   Antes: la escritura del archivo ocurria ANTES del control de sesion y
+   $grupo entraba sin sanear en la ruta (escritura arbitraria sin autenticar). */
+include('logged.php');
 
-        list($type, $data) = explode(';', $data);
-        list(, $data)      = explode(',', $data);
-        $data = base64_decode($data);
+$grupo = isset($_REQUEST['grupo']) ? $_REQUEST['grupo'] : '';
+// El id de grupo siempre viene de prospecto.id: solo digitos.
+if (!ctype_digit((string)$grupo)) {
+    $grupo = '';
+}
 
-        file_put_contents('imagenes/productos/logo_'.$grupo.'.png', $data);
-		
-		$image = imagecreatefrompng('imagenes/productos/logo_'.$grupo.'.png');
-imagejpeg($image, 'imagenes/productos/logo_'.$grupo.'.jpg', 100);
-imagedestroy($image);
-header("Location: producto.php?grupo=$grupo");
+if ($grupo !== '' && isset($_POST['imagebase64'])) {
+    $grupo = (int)$grupo;
+    $bin   = false;
+
+    // Se espera un data URI generado por croppie: data:image/png;base64,....
+    if (preg_match('#^data:image/(?:png|jpeg);base64,([A-Za-z0-9+/=\r\n]+)$#', $_POST['imagebase64'], $m)) {
+        $decoded = base64_decode(preg_replace('/\s+/', '', $m[1]), true);
+        if ($decoded !== false && strlen($decoded) > 0 && strlen($decoded) <= 5242880) {
+            $info = @getimagesizefromstring($decoded);
+            if ($info !== false && ($info[2] == IMAGETYPE_PNG || $info[2] == IMAGETYPE_JPEG)) {
+                $bin = $decoded;
+            }
+        }
     }
+
+    if ($bin !== false) {
+        // Se reconstruye la imagen con GD: cualquier carga util incrustada no sobrevive.
+        $image = @imagecreatefromstring($bin);
+        if ($image !== false) {
+            imagepng($image,  'imagenes/productos/logo_' . $grupo . '.png');
+            imagejpeg($image, 'imagenes/productos/logo_' . $grupo . '.jpg', 100);
+            imagedestroy($image);
+            header('Location: producto.php?grupo=' . $grupo);
+            exit;
+        }
+    }
+    $error_logo = 'La imagen no es valida.';
+}
 ?>
 <?php include('logged.php');?>
 <?php include 'layout/header2.php' ?>

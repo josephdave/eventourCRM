@@ -1,0 +1,5 @@
+# Endurecimiento post-incidente 2026-08-10: carpeta de datos, no de codigo.
+<FilesMatch "\.(php|php3|php4|php5|php7|php8|phtml|phps|phar|shtml|cgi|pl|py)$">
+  Require all denied
+</FilesMatch>
+Options -ExecCGI -Indexes

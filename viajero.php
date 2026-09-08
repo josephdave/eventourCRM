@@ -30,10 +30,12 @@ error_reporting(0);
  */
 
 // MySQL host name, user name, password, database, and table
-$opts['hn'] = 'localhost';
-$opts['un'] = 'eventour_databas';
-$opts['pw'] = 'h3tabew3';
-$opts['db'] = 'eventour_crm';
+// Credenciales: ver db_config.php / config.local.php
+require_once __DIR__ . '/db_config.php';
+$opts['hn'] = $DB_HOST;
+$opts['un'] = $DB_USER;
+$opts['pw'] = $DB_PASS;
+$opts['db'] = $DB_NAME;
 $opts['tb'] = 'viajero';
 
 // Name of field which is the unique key

@@ -1,6 +1,5 @@
 <?php
- //error_reporting(0);
-
+require_once __DIR__ . '/../db_config.php';
 require_once __DIR__ . '/mysql_shim.php';
 
 class control
@@ -20,8 +19,8 @@ class control
 	 function baseDeDatos(){
 
       if ($this->connection) return;
-      $this->connection = mysql_connect("localhost", "root", "") or die(mysql_error());
-      mysql_select_db("eventour_crm", $this->connection) or die(mysql_error());
+      $this->connection = mysql_connect(DB_HOST, DB_USER, DB_PASS) or die(mysql_error());
+      mysql_select_db(DB_NAME, $this->connection) or die(mysql_error());
 	  mysql_query('SET NAMES utf8', $this->connection);
 
    }

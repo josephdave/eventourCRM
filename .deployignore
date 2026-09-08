@@ -1,0 +1,33 @@
+# Rutas que NUNCA viajan de local a produccion.
+# Consumido por deploy.sh como lista de --exclude-from de rsync.
+
+# --- Secretos y config de entorno ---
+config.local.php
+certs/
+
+# --- Metadatos de desarrollo ---
+.git/
+.gitignore
+.deployignore
+DESPLIEGUE.md
+deploy.sh
+
+# --- Datos vivos: propiedad del servidor, jamas se sobrescriben ---
+# Contienen documentos de viajeros (pasaportes, identidades) subidos en
+# produccion. No existen completos en local; copiarlos los destruiria.
+documentos/
+documentos_asistencia/
+documentos_proveedores/
+documentos_sagrlaft/
+imagenes/productos/
+impresion/pdf/
+uploader2/uploades/
+
+# --- Basura que no debe estar en el docroot ---
+# Artefacto de 0 bytes de 2018 (nombre con querystring). Trackeado en git por
+# error, nunca estuvo en produccion. Candidato a 'git rm'.
+programas/grupo_print.php_plan=*
+eventour_crm.zip
+*.sql
+*.tar.gz
+*.log

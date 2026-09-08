@@ -1,4 +1,3 @@
-<?php ini_set('display_errors', 1); error_reporting(E_ALL); ?>
 <?php include('logged.php');?>
 <?php include 'layout/header2.php' ?>
 <?php 

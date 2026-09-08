@@ -1,6 +1,12 @@
 <?php
-// Compatibility shim: maps mysql_* to mysqli_* for PHP 7+
-// Safe to include on PHP 5.6 (block never executes when mysql_* already exist)
+// Shim de compatibilidad: mapea mysql_* a mysqli_* para PHP 7+/8.x.
+//
+// REGLA CRITICA: este archivo se despliega tal cual al servidor de
+// produccion, que corre PHP 5.6. PHP parsea el archivo COMPLETO antes de
+// evaluar el if(), asi que el guard function_exists() NO protege contra
+// sintaxis moderna. Prohibido aqui: ?? , [] para arrays, ...spread,
+// tipos de retorno, arrow fn, ?-> , constructor property promotion.
+// Verificar siempre con:  php5.6 -l control/mysql_shim.php
 if (!function_exists('mysql_connect')) {
 
     $GLOBALS['_shim_mysqli_link'] = null;
@@ -28,8 +34,11 @@ if (!function_exists('mysql_connect')) {
     }
 
     function mysql_fetch_array($result, $mode = MYSQL_BOTH) {
-        $map = [MYSQL_ASSOC => MYSQLI_ASSOC, MYSQL_NUM => MYSQLI_NUM, MYSQL_BOTH => MYSQLI_BOTH];
-        return mysqli_fetch_array($result, $map[$mode] ?? MYSQLI_BOTH);
+        // Sin ?? ni [] : este archivo debe PARSEAR en PHP 5.6 aunque el
+        // bloque nunca se ejecute alli (PHP parsea antes de evaluar el if).
+        $map = array(MYSQL_ASSOC => MYSQLI_ASSOC, MYSQL_NUM => MYSQLI_NUM, MYSQL_BOTH => MYSQLI_BOTH);
+        $m = isset($map[$mode]) ? $map[$mode] : MYSQLI_BOTH;
+        return mysqli_fetch_array($result, $m);
     }
 
     function mysql_fetch_row($result) {

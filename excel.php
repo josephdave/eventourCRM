@@ -1,9 +1,11 @@
 <?php
-/***** EDIT BELOW LINES *****/
-$DB_Server = "localhost"; // MySQL Server
-$DB_Username = "eventour_databas"; // MySQL Username
-$DB_Password = "h3tabew3"; // MySQL Password
-$DB_DBName = "eventour_crm"; // MySQL Database Name
+require_once __DIR__ . '/db_config.php';
+require_once __DIR__ . '/control/mysql_shim.php';
+/***** Credenciales: ver db_config.php / config.local.php *****/
+$DB_Server   = $DB_HOST;
+$DB_Username = $DB_USER;
+$DB_Password = $DB_PASS;
+$DB_DBName   = $DB_NAME;
 $DB_TBLName = "viajero"; // MySQL Table Name
 $xls_filename = 'export_'.date('Y-m-d').'.xls'; // Define Excel (.xls) file name
  

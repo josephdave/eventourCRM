@@ -1,7 +1,5 @@
 <?php session_start();
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-
+	// El nivel de errores lo fija db_config.php segun $APP_ENV.
 	require_once("control/control.php");
 
 $control = new Control();

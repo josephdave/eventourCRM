@@ -6,6 +6,9 @@ if (count(get_included_files()) === 1) {
     exit('Direct access not permitted.');
 }
 
+// Credenciales centralizadas: ver db_config.php / config.local.php
+require_once __DIR__ . '/../db_config.php';
+
 /**
  * Class Config
  */
@@ -18,10 +21,10 @@ class Config
         // ***** Database ***** //
         'dataSources'           => array(
             'ls_query' => array(
-                'host'               => 'localhost',
-                'database'           => 'eventour_crm',
-                'username'           => 'eventour_databas',
-                'pass'               => 'h3tabew3',
+                'host'               => DB_HOST,
+                'database'           => DB_NAME,
+                'username'           => DB_USER,
+                'pass'               => DB_PASS,
                 'table'              => 'viajero',
                 // specify the name of search columns
                 'searchColumns'      => array('nombres','apellidos','no_documento'),
