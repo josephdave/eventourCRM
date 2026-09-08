@@ -156,9 +156,10 @@ table.vb-container.fullwidth {padding-left: 0;padding-right: 0;}</style><style t
                             </tr></tbody></table></td>
                       </tr></tbody></table></div><!--[if (gte mso 9)|(lte ie 8)]></td>
 <td align='left' valign='top' width='276'>
-<![endif]--><div style='display: inline-block; max-width: 276px; vertical-align: top; width: 100%;' class='mobile-full'> 
+<![endif]--><div style='display: inline-block; max-width: 276px; vertical-align: top; width: 100%;' class='mobile-full'>
 ";
-	if($producto['unidad_negocio'] == 'GRUPOS JUVENILES'){
+	$es_aviatur = strpos($producto['parametros'], 'inscripcion-aviatur') !== false;
+	if($producto['unidad_negocio'] == 'GRUPOS JUVENILES' && !$es_aviatur){
 	$contenido.="<table class='vb-content' border='0' cellspacing='9' cellpadding='0' width='276' style='border-collapse: separate;width: 100%;' align='right'><tbody><tr><td style='font-size: 18px; font-family: Arial, Helvetica, sans-serif; color: #3f3f3f; text-align: left;'>
                           <span style='color: #3f3f3f;'>Contrato</span>
                         </td>

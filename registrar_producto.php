@@ -389,6 +389,16 @@ if(isset($_REQUEST['modificar'])){
        				                <p>&nbsp;</p></td>
        				          </tr>
                                <tr>
+                                 <td bgcolor="#CCCCCC">Inscripción Aviatur</td>
+                                 <td colspan="3">
+                                   <p>
+                                     <input type="checkbox" name="chk_inscripcion_aviatur" id="chk_inscripcion_aviatur" onClick="evalparametros('inscripcion-aviatur')"
+                                     <?php if(strpos($param,'inscripcion-aviatur')!== false){ echo "checked"; }?>>
+                                     INSCRIPCION AVIATUR
+                                   </p>
+                                 </td>
+                               </tr>
+                               <tr>
                                  <td bgcolor="#CCCCCC">Tarjeta de Asistencia</td>
                                  <td colspan="3"><p></p>
                                    <p>

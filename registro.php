@@ -34,6 +34,9 @@ if(isset($_REQUEST['ac'])){
 	if(isset($_REQUEST['plan'])){
 		$producto = $control->equivProducto($_REQUEST['plan']);
 		$datos_producto=$control->datosProducto($_REQUEST['plan']);
+		if(strpos($datos_producto['parametros'], 'inscripcion-aviatur') !== false){
+			$contrato = false;
+		}
 	} else {
 		$producto = "";
 	}
@@ -1719,7 +1722,18 @@ $('#envio').prop('disabled',false); // append the image (SVG) to DOM.
 </div>
                               </form>
                               <p>
-                                <?php } if($paso == 4){ ?>
+                                <?php } if($paso == 4){
+                                    // Cuando se salta el paso de firma, calcular credenciales desde los campos del formulario
+                                    if(empty($_REQUEST['apellido_login'])){
+                                        $ap = isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
+                                        $ape = explode(" ", trim($ap));
+                                        $_REQUEST['apellido_login'] = $ape[0];
+                                    }
+                                    if(empty($_REQUEST['doc_login'])){
+                                        $ap1 = isset($_POST['no_docuento']) ? $_POST['no_docuento'] : (isset($_POST['document']) ? $_POST['document'] : '');
+                                        $_REQUEST['doc_login'] = str_replace(".", "", trim($ap1));
+                                    }
+                                ?>
                               </p>
                               <h2> DOCUMENTACIÓN</h2>
                               <p><span style="color: red">El Documento del viajero y del pagador de programa son OBLIGATORIOS para poder continuar.</span></p>

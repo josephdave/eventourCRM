@@ -748,6 +748,7 @@ $meses = array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agos
           </div>
           <p>&nbsp;</p>
            <div class="clearfix"></div>
+           <?php if(strpos($producto['parametros'],'inscripcion-aviatur') === false): ?>
            <h3>Términos y condiciones del programa</h3>
           <p>&nbsp;</p>
         
@@ -1054,8 +1055,9 @@ Le invitamos a realizar consumo consciente de los recursos materiales y naturale
 <p align="center"><br>
 </p>
           <p></p>
+           <?php endif; ?>
       </div>
-         
+
 </div>
 		</section>	
 		<hr/>
