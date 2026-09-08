@@ -3,7 +3,7 @@
 #
 # Contexto: local corre PHP 8.3, produccion corre PHP 5.6.40. El codigo debe
 # parsear en AMBAS. Este script lo verifica contra el interprete 5.6 REAL del
-# servidor antes de copiar nada. Ver DESPLIEGUE.md.
+# servidor antes de copiar nada. Ver docs/deployment.md.
 #
 # Uso:
 #   ./deploy.sh check     Solo verifica (lint 5.6 + estado). No copia nada.
@@ -93,7 +93,7 @@ step "4/6  Estado del servidor"
 $SSH "test -d $REMOTE_DIR" || die "no existe $REMOTE_DIR"
 REMOTE_PHP=$($SSH "/usr/bin/selectorctl --user-current --interpreter=php 2>/dev/null | awk '{print \$2}'")
 ok "PHP web en produccion: ${REMOTE_PHP:-desconocido}"
-[ "${REMOTE_PHP%%.*}" = "5" ] || warn "el servidor ya NO corre PHP 5.x — revisa DESPLIEGUE.md antes de seguir"
+[ "${REMOTE_PHP%%.*}" = "5" ] || warn "el servidor ya NO corre PHP 5.x — revisa docs/deployment.md antes de seguir"
 if $SSH "test -f $REMOTE_DIR/config.local.php"; then
     die "existe config.local.php EN PRODUCCION. Borralo: usaria credenciales locales."
 fi

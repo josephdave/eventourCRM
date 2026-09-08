@@ -9,7 +9,7 @@ certs/
 .git/
 .gitignore
 .deployignore
-DESPLIEGUE.md
+docs/
 deploy.sh
 
 # --- Datos vivos: propiedad del servidor, jamas se sobrescriben ---
