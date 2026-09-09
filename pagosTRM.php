@@ -146,7 +146,7 @@ var table_html = table_html.replaceAll(',', ',');
            				      <td><?php echo "$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
            				      <td><?php echo "$ ".number_format($pagosPT+$pagosTK,1,",","."); ?></td>
 			                 </tr>
-                                 <?
+                                 <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$facturador_nombre=$fi['facturacion_nombre'];
@@ -329,7 +329,7 @@ var table_html = table_html.replaceAll(',', ',');
                               <td><?php echo "$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
                               <td><strong><?php echo "$ ".number_format($terrestre_base+$ModificacionesPT-$pagosPT,1,",",".")?></strong></td>
                             </tr>
-                            <?
+                            <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];

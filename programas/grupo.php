@@ -908,7 +908,7 @@ foreach ($files as $file)
 	
 	?>
     <a href="<?php echo "http://eventoursport.travel/crm/documentos_asistencia/". str_replace(" ","_",$asistencia['nombre']).".".$info["extension"] ?>" target="_blank" class="myButton">CONSULTAR COBERTURA</a>
-    <?
+    <?php
    // echo "File found: extension ".$info["extension"]."<br>";
  }
 								

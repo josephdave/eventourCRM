@@ -202,7 +202,7 @@ var table_html = table_html.replaceAll(',', ',');
            				      <td><?php echo $producto['MONEDA']."$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
            				      <td><strong><?php echo $producto['MONEDA']."$ ".number_format($terrestre_base+$ModificacionesPT-$pagosPT,1,",",".")?></strong></td>
        				        </tr>
-                                 <?
+                                 <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								 $facturador_nombre=$fi['facturacion_nombre'];
@@ -442,7 +442,7 @@ var table_html = table_html.replaceAll(',', ',');
            				      <td><?php echo $producto['MONEDA']."$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
            				      <td><strong><?php echo $producto['MONEDA']."$ ".number_format($terrestre_base+$ModificacionesPT-$pagosPT,1,",",".")?></strong></td>
        				        </tr>
-                                 <?
+                                 <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								 $facturador_nombre=$fi['facturacion_nombre'];

@@ -81,7 +81,7 @@
            				      <td><?php echo $terrestre_base+$ModificacionesPT-$pagosPT?></td>
            				      <td><?php echo $pagosPT ?></td>
        				        </tr>
-                                 <?
+                                 <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$viajero = strtoupper($fi['apellidos'])." ".strtoupper($fi['nombres']);

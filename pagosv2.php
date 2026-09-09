@@ -142,7 +142,7 @@ for (i = 0; i < x.length; i++) {
            				      <td><?php echo $producto['MONEDA']."$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
            				      <td><strong><?php echo $producto['MONEDA']."$ ".number_format($terrestre_base+$ModificacionesPT-$pagosPT,1,",",".")?></strong></td>
        				        </tr>
-                                 <?
+                                 <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];
@@ -278,7 +278,7 @@ for (i = 0; i < x.length; i++) {
                               <td><?php echo $producto['MONEDA']."$ ".number_format($pagosPT,1,",","."); $gtotalpagospt+=$pagosPT; ?></td>
                               <td><strong><?php echo $producto['MONEDA']."$ ".number_format($terrestre_base+$ModificacionesPT-$pagosPT,1,",",".")?></strong></td>
                             </tr>
-                            <?
+                            <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];

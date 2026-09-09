@@ -1066,7 +1066,7 @@ var table_html = table_html.replaceAll(',', ',');
 								 <?php }?>
                                   <td align="right" class="resultados">
 								 <?php  echo number_format($precioFinal,2,",",".") ?></td>
-                                  <td align="right" class="resultados"><? echo number_format($precioFinal*$viajeros,2,",",".") ?></td>
+                                  <td align="right" class="resultados"><?php echo number_format($precioFinal*$viajeros,2,",",".") ?></td>
                                   <td>&nbsp;</td>
                                 </tr>
 								     <tr id="detalle_margenpt" style="display: none"> 
@@ -1126,7 +1126,7 @@ var table_html = table_html.replaceAll(',', ',');
 							         <td align="right" class="resultados"><?php 
 								
 								  echo number_format($precioFinaltk,2,",",".") ?></td>
-							         <td align="right" class="resultados"><? echo number_format($precioFinaltk*$viajeros,2,",",".") ?></td>
+							         <td align="right" class="resultados"><?php echo number_format($precioFinaltk*$viajeros,2,",",".") ?></td>
 							         <td>&nbsp;</td>
 					          </tr>
 						        <tr id="detalle_margentk" style="display: none">
@@ -1187,7 +1187,7 @@ var table_html = table_html.replaceAll(',', ',');
                                   <td align="right" class="resultadofinal"><?php 
 								 
 								  echo number_format($precioFinaltotal,2,",",".") ?></td>
-                                  <td align="right" class="resultadofinal"><? echo number_format($precioFinaltotal*$viajeros,2,",",".") ?></td>
+                                  <td align="right" class="resultadofinal"><?php echo number_format($precioFinaltotal*$viajeros,2,",",".") ?></td>
                                   <td >&nbsp;</td>
                                 </tr>
                                 <tr>

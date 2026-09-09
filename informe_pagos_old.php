@@ -189,7 +189,7 @@ var table_html = table_html.replaceAll(',', '.');
 							  $gtotalsaldo+=$aereo_base+$ModificacionesTK+$terrestre_base+$ModificacionesPT-$pagosPT-$pagosTK;
 							  ?><?php
 							  
-							   $gtotaltk+=$aereo_base+$ModificacionesTK;  ?><?php  $gtotalpagostk+=$pagosTK; ?><?php  $gtotalpt+=$terrestre_base+$ModificacionesPT; ?> <?php  $gtotalpagospt+=$pagosPT; ?>     <?
+							   $gtotaltk+=$aereo_base+$ModificacionesTK;  ?><?php  $gtotalpagostk+=$pagosTK; ?><?php  $gtotalpt+=$terrestre_base+$ModificacionesPT; ?> <?php  $gtotalpagospt+=$pagosPT; ?>     <?php
 								 }
 								 
 								$facturador=$fi['facturacion_nodocumento'];
@@ -366,7 +366,7 @@ var table_html = table_html.replaceAll(',', '.');
                              <?php  $gtotalpagostk+=$pagosTK; ?>
                              <?php  $gtotalpt+=$terrestre_base+$ModificacionesPT; ?>
                              <?php  $gtotalpagospt+=$pagosPT; ?>
-                             <?
+                             <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];

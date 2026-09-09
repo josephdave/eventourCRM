@@ -547,7 +547,7 @@ for (i = 0; i < x.length; i++) {
                              <?php  $gtotalpagostk+=$pagosTK; ?>
                              <?php  $gtotalpt+=$terrestre_base+$ModificacionesPT; ?>
                              <?php  $gtotalpagospt+=$pagosPT; ?>
-                             <?
+                             <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];

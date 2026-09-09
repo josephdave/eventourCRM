@@ -433,7 +433,7 @@ foreach ($files as $file)
 	
 	?>
     <a href="<?php echo $file ?>" target="_blank"><?php echo $info['filename']; ?> Ver Documento</a><br/>
-    <?
+    <?php
    // echo "File found: extension ".$info["extension"]."<br>";
  }
 								

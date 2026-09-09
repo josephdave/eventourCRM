@@ -135,7 +135,7 @@ foreach ($files as $file)
 	
 	?>
     <a href="<?php echo "documentos_asistencia/". str_replace(" ","_",$proveedor['nombre']).".".$info["extension"] ?>" target="_blank">Ver Documento</a>
-    <?
+    <?php
    // echo "File found: extension ".$info["extension"]."<br>";
  }
 								

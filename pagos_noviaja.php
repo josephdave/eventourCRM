@@ -169,7 +169,7 @@ var table_html = table_html.replaceAll(',', ',');
 								  $gtotalpagosptp+=$pagosPTP;?></td>
                               <td><?php echo number_format($pagosPTP,0,",",".");?></td>
                               </tr>
-                            <?
+                            <?php
 								 }
 								$facturador=$fi['facturacion_nodocumento'];
 								$id=$fi['id'];

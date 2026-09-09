@@ -345,7 +345,7 @@ $dias=$diff->format("%r%a");
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td >&nbsp;</td>
-  </tr><? } ?>
+  </tr><?php } ?>
   <!--<tr>
     <td colspan="4" valign="top" bgcolor="#CCCCCC" align="center"><strong>VALOR PROGRAMA <?php echo $cant_viajeros ?> VIAJERO(S):</strong></td>
   </tr>
