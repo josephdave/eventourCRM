@@ -3936,7 +3936,7 @@ return $str;
    		$mensaje="";
 		
 		
-		$q="SELECT viajero.id, viajero.id_grupo, nombres, apellidos, documento, no_documento, fnacimiento, email, telefono, celular, acompanante_de,pasaporte, pasaporte_vigencia, visa_americana, visa_vigencia, acudiente1_nombre, acudiente1_apellido, acudiente1_telefono, acudiente1_email, acudiente2_nombre, acudiente2_apellido, acudiente2_telefono, acudiente2_email, facturacion_nombre, facturacion_documento, facturacion_nodocumento, facturacion_direccion, otro,facturacion_email, fregistro, doc_identidad, doc_pasaporte, doc_permiso, doc_visa, viajero.estado, viajero.record FROM viajero, producto WHERE producto.id = viajero.id_grupo and viajero.estado = 'NO VIAJA' ";
+		$q="SELECT viajero.id, viajero.id_grupo, nombres, apellidos, documento, no_documento, fnacimiento, email, telefono, celular, acompanante_de,pasaporte, pasaporte_vigencia, visa_americana, visa_vigencia, acudiente1_nombre, acudiente1_apellido, acudiente1_telefono, acudiente1_email, acudiente2_nombre, acudiente2_apellido, acudiente2_telefono, acudiente2_email, facturacion_nombre, facturacion_documento, facturacion_nodocumento, facturacion_direccion, otro,facturacion_email, fregistro, doc_identidad, doc_pasaporte, doc_permiso, doc_visa, viajero.estado, viajero.record, control, expediente FROM viajero, producto WHERE producto.id = viajero.id_grupo and viajero.estado = 'NO VIAJA' ";
 		
 			if($grupo == 0){
 			

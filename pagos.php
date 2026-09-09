@@ -121,6 +121,7 @@ var table_html = table_html.replaceAll(',', ',');
            				      <?php if($_REQUEST['grupo'] == 0){?>
            				    <tr><?php } ?>
            				      <th data-sortable="true"data-field="viajeros" ><strong>Viajero(s)</strong></th>
+           				      <th>No. Expediente</th>
            				      <th>Tercero</th>
            				      <th>Subprograma</th>
            				      <th>Nombre Tercero</th>
@@ -143,6 +144,7 @@ var table_html = table_html.replaceAll(',', ',');
 							
 							$facturador="";
 							$subprograma="";
+							$expediente="";
 							   
 							$aereo_base=0;
 							$ModificacionesTK=0;
@@ -174,6 +176,7 @@ var table_html = table_html.replaceAll(',', ',');
 								 ?>
                                   <tr>
                                  <td><a href="registrar_pago.php?doc=<?php echo $id ?>"><?php echo $viajero; echo "(".(substr_count ($viajero,"-")+1).")"; ?></a></td>
+           				      <td><?php echo $expediente ?></td>
                                  
            				      <td><?php echo $facturador ?><br>
                               <!-- <a href="pagos.php?marca=<?php echo $id ?>&grupo=<?php echo $_REQUEST['grupo']?>">(TK Tarjeta)</a> -->
@@ -228,6 +231,7 @@ var table_html = table_html.replaceAll(',', ',');
 							} 
 								 
 								$viajero = strtoupper($fi['apellidos'])." ".strtoupper($fi['nombres']);
+								$expediente = ($fi['expediente'] != "") ? $fi['expediente'] : "S/E";
 								
 								$aereo_base= $control->valorViajeroTK($fi['otro'],$producto);
 								$ModificacionesTK =  $control->consultarModificaciones($fi['id'],$_REQUEST['grupo'],'TK');
@@ -273,12 +277,14 @@ var table_html = table_html.replaceAll(',', ',');
 								$pagosPT=$pagos['pagosPT'];
                                  
 								$viajero.=" - ".strtoupper($fi['apellidos'])." ".strtoupper($fi['nombres']);
+								$expediente.=" - ".(($fi['expediente'] != "") ? $fi['expediente'] : "S/E");
 								$viajacon=$viajacon+1;
 								}
 								
 							 } ?>
                              <tr>
                                  <td><a href="registrar_pago.php?doc=<?php echo $id ?>"><?php echo $viajero; echo "(".(substr_count ($viajero,"-")+1).")";?></a></td>
+           				      <td><?php echo $expediente ?></td>
            				      <td><?php echo $facturador ?> <br>
                               <!-- <a href="pagos.php?marca=<?php echo $id ?>&grupo=<?php echo $_REQUEST['grupo']?>">(TK Tarjeta)</a></td> -->
            				      <td><?php echo $subprograma ?></td>
@@ -305,6 +311,7 @@ var table_html = table_html.replaceAll(',', ',');
                              <tfoot>
                                  <tr>
                                <td><strong>TOTAL</strong></td>
+                               <td>&nbsp;</td>
                                <td><strong><?php echo $gtotalviajeros;?></strong></td>
                                <td>&nbsp;</td>
                                <td>&nbsp;</td>
@@ -364,6 +371,7 @@ var table_html = table_html.replaceAll(',', ',');
            				      <?php if($_REQUEST['grupo'] == 0){?>
            				    <tr><?php } ?>
            				      <th data-sortable="true"data-field="viajeros" ><strong>Viajero(s)</strong></th>
+           				      <th>No. Expediente</th>
            				      <th>Tercero</th>
            				      <th>Subprograma</th>
            				      <th>Nombre Tercero</th>
@@ -385,6 +393,7 @@ var table_html = table_html.replaceAll(',', ',');
 							
 							$facturador="";
 							$subprograma="";
+							$expediente="";
 							   
 							$aereo_base=0;
 							$ModificacionesTK=0;
@@ -415,6 +424,7 @@ var table_html = table_html.replaceAll(',', ',');
 								 ?>
                                   <tr>
                                  <td><a href="registrar_pago.php?doc=<?php echo $id ?>"><?php echo $viajero; echo "(".(substr_count ($viajero,"-")+1).")"; ?></a></td>
+           				      <td><?php echo $expediente ?></td>
                                  
            				      <td><?php echo $facturador ?><br>
                               <!-- <a href="pagos.php?marca=<?php echo $id ?>&grupo=<?php echo $_REQUEST['grupo']?>">(TK Tarjeta)</a> -->
@@ -468,6 +478,7 @@ var table_html = table_html.replaceAll(',', ',');
 							} 
 								 
 								$viajero = strtoupper($fi['apellidos'])." ".strtoupper($fi['nombres']);
+								$expediente = ($fi['expediente'] != "") ? $fi['expediente'] : "S/E";
 								
 								$aereo_base= $control->valorViajeroTK($fi['otro'],$producto);
 								$ModificacionesTK =  $control->consultarModificaciones($fi['id'],$_REQUEST['grupo'],'TK');
@@ -515,12 +526,14 @@ var table_html = table_html.replaceAll(',', ',');
                                  $pagosValidacion=$pagos['sinValidarTIK']+$pagos['sinValidarPT'];
                                  
 								$viajero.=" - ".strtoupper($fi['apellidos'])." ".strtoupper($fi['nombres']);
+								$expediente.=" - ".(($fi['expediente'] != "") ? $fi['expediente'] : "S/E");
 								$viajacon=$viajacon+1;
 								}
 								
 							 } ?>
                              <tr>
                                  <td><a href="registrar_pago.php?doc=<?php echo $id ?>"><?php echo $viajero; echo "(".(substr_count ($viajero,"-")+1).")";?></a></td>
+           				      <td><?php echo $expediente ?></td>
            				      <td><?php echo $facturador ?> <br>
                               <!-- <a href="pagos.php?marca=<?php echo $id ?>&grupo=<?php echo $_REQUEST['grupo']?>">(TK Tarjeta)</a></td> -->
            				      <td><?php echo $subprograma ?></td>
@@ -546,6 +559,7 @@ var table_html = table_html.replaceAll(',', ',');
                              <tfoot>
                                  <tr>
                                <td><strong>TOTAL</strong></td>
+                               <td>&nbsp;</td>
                                <td><strong><?php echo $gtotalviajeros;?></strong></td>
                                <td>&nbsp;</td>
                                <td>&nbsp;</td>
